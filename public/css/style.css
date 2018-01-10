@@ -1,0 +1,95 @@
+.sidenav{
+    height: 100%;
+    width: 20%;
+    position: fixed;
+    z-index: 3;
+    top:0;
+    left:0;
+    background: #fefefe;
+    overflow-x: hidden;
+    padding:0;
+    transition: 0.5s;
+}
+
+.sidenav a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3;
+}
+
+.sidenav a:hover{
+    color: #000000;
+}
+
+.sidenav .closebtn{
+    position: absolute;
+    display:none;
+    top:0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.opennav{
+    z-index:2;
+    position:fixed;
+    display:none;
+}
+
+.table-fixed thead{
+    position:fixed;
+    width: 100%;
+    background: white;
+    border-bottom:1px solid #0c0c0c0c;
+    padding:4px;
+    height:50px;
+}
+
+.table-fixed thead tr{
+    width:70%;
+    display:block;
+}
+
+.table-fixed thead tr th{
+    float:left;
+    border:0;
+}
+
+.table-fixed tbody:before{
+    content:"-";
+    display: inline-block;
+    line-height: 3.8em;
+    color:transparent;
+}
+
+/*Columns*/
+.col-1_5{
+    width: 12%;
+}
+
+
+.content{
+    width: 81%;
+}
+
+@media screen and (max-width: 500px){
+    .opennav{
+        display: block;
+    }
+    .sidenav .closebtn{
+        display:block;
+    }
+    .sidenav {
+        width:0;
+        padding-top: 15px;
+    }
+    .sidenav a{
+        font-size: 18px;
+    }
+    .content{
+        width:100%;
+    }
+}

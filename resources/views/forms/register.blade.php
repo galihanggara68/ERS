@@ -36,7 +36,7 @@
         <div class="form-group">
             {{ Form::label('password', 'Password', ['class' => 'col-lg-4 control-label']) }}
             <div class="col-lg-5">
-                {{ Form::password('password', null, ['class' => 'form-control']) }}
+                {{ Form::password('password', ['class' => 'form-control']) }}
                 <div class="text-danger">{{ $errors->first('password') }}</div>
             </div>
             <div class="clear"></div>
@@ -45,7 +45,7 @@
         <div class="form-group">
             {{ Form::label('password_confirmation', 'Konfirmasi Password', ['class' => 'col-lg-4 control-label']) }}
             <div class="col-lg-5">
-                {{ Form::password('password_confirmation', null, ['class' => 'form-control']) }}
+                {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
                 <div class="text-danger">{{ $errors->first('password_confirmation') }}</div>
             </div>
             <div class="clear"></div>
@@ -53,7 +53,7 @@
 
         <div class="form-group">
             <div class="col-lg-5 center-block">
-                {{ Form::submit('Registrasi') }}
+                {{ Form::submit('Registrasi', ['class' => 'btn btn-lg btn-default']) }}
             </div>
         </div>
     {{ Form::close() }}

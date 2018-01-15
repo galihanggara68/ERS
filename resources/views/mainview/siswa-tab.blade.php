@@ -37,7 +37,8 @@ Data Siswa
                 <th class="col-xs-3">Nama</th>
                 <th class="col-xs-2">Kelas</th>
                 <th class="col-xs-3">Jurusan</th>
-                <th class="col-xs-2">Status</th>
+                <th class="col-xs-1">Status</th>
+                <th class="col-xs-1">{{ link_to_route('siswa.create', '', null, ['class' => 'btn btn-default glyphicon glyphicon-plus']) }}</th>
             </tr>
         </thead>
         <tbody>

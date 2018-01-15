@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Guru, App\Kelas, App\Jurusan, App\Mapel;
-use Auth, Session, Validator;
+use Session, Validator;
 
 class GuruController extends Controller
 {
@@ -25,8 +25,18 @@ class GuruController extends Controller
      */
     public function create()
     {
-        if(Auth::guest()) return back();
-        return view('forms.guru-form');
+        $guru = new Guru;
+        $kelas = Kelas::all()->pluck('nama', 'id')->toArray();
+        array_unshift($kelas, "--Bukan Wali Kelas--");
+        $jurusan = Jurusan::all()->pluck('nama', 'id')->toArray();
+        array_unshift($jurusan, "--Bukan Kaprog--");
+        $mapel = Mapel::all()->pluck('nama', 'id')->toArray();
+        return view('forms.guru-form', [
+            'guru' => $guru, 
+            'kelas' => $kelas, 
+            'jurusan' => $jurusan,
+            'mapel' => $mapel
+        ]);
     }
 
     /**
@@ -37,7 +47,6 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::guest()) return back();
         $valid = Validator::make($request->all(), Guru::valid());
         if($valid->fails()){
             $request->session()->flash('error', 'Gagal Membuat Data Guru');
@@ -45,11 +54,12 @@ class GuruController extends Controller
             ->withErrors($valid)
             ->withInput();
         }
-        $guru = new Guru($request->all());
-        $guru->guruKelas()->attach($request->kelas);
-        foreach($request->mapel as $mapel){
-            $guru->mapel()->attach($mapel);
-        }
+        
+        $guru = Guru::create($request->all());
+        for($i = 0; $i < count($request->kelas_id); $i++)
+            $guru->mengajar()->attach($request->kelas_id[$i], ['mapel_id' => $request->mapel_id[$i]]);
+        Kelas::find($request->wali)->update(['guru_id' => $guru->id]);
+        Jurusan::find($request->kaprog)->update(['guru_id' => $guru->id]);
         $request->session()->flash('success', 'Sukses Membuat Data Guru');
         return redirect('/dashboard');
     }
@@ -74,7 +84,7 @@ class GuruController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::guest()) return back();
+        
         $guru = Guru::find($id);
         $kelas = Kelas::all()->pluck('nama', 'id')->toArray();
         array_unshift($kelas, "--Bukan Wali Kelas--");
@@ -98,7 +108,7 @@ class GuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::guest()) return back();
+        
         $valid = Validator::make($request->all(), Guru::valid());
         if($valid->fails()){
             $request->session()->flash('error', 'Gagal Mengupdate Data Guru');
@@ -107,10 +117,10 @@ class GuruController extends Controller
             ->withInput();
         }
         $guru = Guru::find($id);
-        $guru->update([]);
-        foreach($request->mapel as $mapel){
-            $guru->mapel()->attach($mapel);
-        }
+        $guru->update($request->all());
+        $guru->mengajar()->sync($request->kelas_id);
+        Kelas::find($request->wali)->update(['guru_id' => $guru->id]);
+        Jurusan::find($request->kaprog)->update(['guru_id' => $guru->id]);
         $request->session()->flash('success', 'Sukses Mengupdate Data Guru');
         return redirect('/dashboard');
     }
@@ -123,7 +133,7 @@ class GuruController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::guest()) return back();
+        
         Guru::destroy($id);
         $request->session()->flash('success', 'Sukses Menghapus Data Guru');
         return redirect('/dashboard');

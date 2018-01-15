@@ -10,14 +10,10 @@ class Mapel extends Model
     public $timestamps = false;
 
     public function nilai(){
-        return $this->belongsToMany('App\Nilai');
+        return $this->belongsToMany('App\Siswa', 'nilais');
     }
 
-    public function mapelKelas(){
-        return $this->hasMany('App\MapelKelas');
-    }
-
-    public function guru(){
-        return $this->hasMany('App\GuruMapel');
+    public function guruKelas(){
+        return $this->belongsToMany('App\Guru', 'gurukelas', 'mapel_id');
     }
 }

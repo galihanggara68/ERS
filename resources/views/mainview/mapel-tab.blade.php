@@ -9,6 +9,7 @@ Data Jurusan
         <thead>
             <th>ID</th>
             <th>Nama</th>
+            <th class="col-xs-1">{{ link_to_route('mapel.create', '', null, ['class' => 'btn btn-default glyphicon glyphicon-plus']) }}</th>
         </thead>
         <tbody>
         @foreach($data as $mapel)

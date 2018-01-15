@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Siswa;
 use App\Kelas;
 use App\Jurusan;
-use Validator, Session, Auth;
+use Validator, Session, Sentinel;
 
 class SiswaController extends Controller
 {
@@ -15,6 +15,15 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $cred = [
+            'email' => 'galih@mail.com',
+            'password' => 'admin123'
+        ];
+        Sentinel::authenticate($cred);
+    }
+
     public function index()
     {
         //
@@ -27,7 +36,6 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        if(Auth::guest()) return back();
         return view('forms.siswa-form');
     }
 
@@ -39,7 +47,6 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::guest()) return back();
         $valid = Validator::make($request->all(), Siswa::valid());
         if($valid->fails()){
             $request->session()->flash('error', 'Gagal Membuat Data Siswa');
@@ -72,7 +79,6 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::guest()) return back();
         $siswa = Siswa::find($id);
         $kelas = Kelas::all()->pluck('nama', 'id')->toArray();
         $jurusan = Jurusan::all()->pluck('nama', 'id')->toArray();
@@ -92,7 +98,6 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::guest()) return back();
         $valid = Validator::make($request->all(), Siswa::valid());
         if($valid->fails()){
             $request->session()->flash('error', 'Gagal Mengupdate Data Siswa');
@@ -113,7 +118,6 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::guest()) return back();
         Siswa::destroy($id);
         $request->session()->flash('success', 'Sukses Menghapus Data Siswa');
         return redirect('/dashboard');

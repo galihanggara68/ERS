@@ -15,11 +15,7 @@ class Kelas extends Model
     }
 
     public function guruKelas(){
-        return $this->hasMany('App\GuruKelas');
-    }
-
-    public function mapelKelas(){
-        return $this->hasMany('App\MapelKelas');
+        return $this->belongsToMany('App\Guru', 'gurukelas');
     }
 
     public function siswa(){

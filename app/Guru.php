@@ -9,12 +9,18 @@ class Guru extends Model
     protected $fillable = ['nip', 'nama'];
     public $timestamps = false;
 
-    public function kelas(){
+    public function walikelas(){
         return $this->hasOne('App\Kelas');
     }
 
-    public function guruKelas(){
-        return $this->hasMany('App\GuruKelas', 'guru_id');
+    public function mengajar(){
+        return $this->belongsToMany('App\Kelas', 'gurukelas')
+        ->withPivot('mapel_id');
+    }
+
+    public function mapel(){
+        return $this->belongsToMany('App\Mapel', 'gurukelas')
+        ->withPivot('kelas_id');
     }
 
     public function jurusan(){
@@ -22,13 +28,13 @@ class Guru extends Model
     }
 
     public function nilai(){
-        return $this->hasMany('App\Nilai');
+        return $this->belongsToMany('App\Siswa', 'nilais');
     }
 
     //Validator
     public static function valid(){
         return [
-            'nip' => 'required|max:13|unique',
+            'nip' => 'required|max:13',
             'nama' => 'required|max:28'
         ];
     }

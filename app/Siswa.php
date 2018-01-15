@@ -9,8 +9,13 @@ class Siswa extends Model
     protected $fillable = ['nis', 'nama', 'kelas_id', 'jurusan_id', 'status'];
     public $timestamps = false;
 
-    public function nilai(){
-        return $this->hasMany('App\Nilai');
+    public function diajar(){
+        return $this->belongsToMany('App\Guru', 'nilais');
+    }
+
+    public function belajar(){
+        return $this->belongsToMany('App\Mapel', 'nilais')
+        ->withPivot('guru_id', 'pengetahuan', 'keterampilan', 'sisosp');
     }
 
     public function kelas(){

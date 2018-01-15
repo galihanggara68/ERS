@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(["prefix" => 'dashboard', 'middleware' => 'auth'], function(){
+Route::group(["prefix" => 'dashboard'], function(){
     Route::get('/', 'MainController@siswa');
     Route::get('/kelas', 'MainController@kelas');
     Route::get('/guru', 'MainController@guru');
@@ -33,4 +33,3 @@ Route::group(["prefix" => 'dashboard', 'middleware' => 'auth'], function(){
     Route::resource('/nilai', 'NilaiController', ['except' => ['index']]);
     Route::resource('/user', 'UserController', ['except' => ['index']]);
 });
-Auth::routes();

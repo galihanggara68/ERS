@@ -10,9 +10,19 @@ use App\Jurusan;
 use App\Guru;
 use App\Nilai;
 use App\User;
+use Sentinel;
 
 class MainController extends Controller
 {
+
+    public function __construct(){
+        $cred = [
+            'email' => 'galih@mail.com',
+            'password' => 'admin123'
+        ];
+        Sentinel::authenticate($cred);
+    }
+
     public function siswa()
     {
         $siswa = Siswa::paginate(15);

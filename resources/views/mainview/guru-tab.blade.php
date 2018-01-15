@@ -9,6 +9,7 @@ Data Guru
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3>{{ $guru->nama }}</h3>
+            <span>{{ link_to_route('guru.edit', 'Edit', $guru->id, ['class' => 'btn btn-default']) }}</span>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -20,14 +21,21 @@ Data Guru
                 <div class="col-xs-9">{{ $guru->nama }}</div>
             </div>
             <div class="row">
-                <div class="col-xs-3">{{ Form::label('kelas', 'Kelas :') }}</div>
-                <div class="col-xs-9">{{ $guru->kelas->nama }}</div>
+                <div class="col-xs-3">{{ Form::label('kelas', 'Wali Kelas :') }}</div>
+                <div class="col-xs-9">{{ isset($guru->kelas->nama) ? $guru->kelas->nama : '-' }}</div>
             </div>
             <div class="row">
-                <div class="col-xs-3">{{ Form::label('mapel', 'Mata Pelajaran :') }}</div>
+                <div class="col-xs-3">{{ Form::label('jurusan', 'Kaprog :') }}</div>
+                <div class="col-xs-9">{{ isset($guru->jurusan->nama) ? $guru->jurusan->nama : '-' }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">{{ Form::label('mapel', 'Mengajar :') }}</div>
                 @if(isset($guru->mapel))
                     @foreach($guru->mapel as $mapel)
-                        <div class="col-xs-9">{{ $mapel->nama }}</div>
+                        <div class="row col-xs-12">
+                            <div class="col-xs-6">{{ link_to_route('kelas.show', $guru->mengajar[$loop->index]->nama, $guru->mengajar[$loop->index]->id) }}</div>
+                            <div class="col-xs-6">{{ $mapel->nama }}</div>
+                        </div>
                     @endforeach
                 @endif
             </div>
@@ -38,6 +46,7 @@ Data Guru
         <thead>
             <th>NIP</th>
             <th>Nama</th>
+            <th class="col-xs-1">{{ link_to_route('guru.create', '', null, ['class' => 'btn btn-default glyphicon glyphicon-plus']) }}</th>
         </thead>
         <tbody>
         @foreach($data as $guru)

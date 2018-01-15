@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kelas;
+
 
 class KelasController extends Controller
 {
@@ -45,7 +47,8 @@ class KelasController extends Controller
      */
     public function show($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        return view('mainview.kelas-tab', ['kelas' => $kelas]);
     }
 
     /**

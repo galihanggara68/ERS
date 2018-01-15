@@ -19,9 +19,7 @@
             {{ link_to('/dashboard/mapel', 'Mapel') }}
             {{ link_to('/dashboard/nilai', 'Nilai') }}
             {{ link_to('/dashboard/user', 'User') }}
-            {{ Form::open(['url' => 'logout', 'method' => 'POST']) }}
-                {{ Form::submit('Logout', ['class' => 'well col-xs-12']) }}
-            {{ Form::close() }}
+            {{ link_to_route('logout', 'Logout', null, ['class' => 'btn btn-lg btn-danger btn-outline-default', 'id' => 'logout']) }}
         </div>
         <span onclick="openNav()" class="opennav"><i class="glyphicon glyphicon-menu-hamburger btn btn-default"></i></span>
         <div class="content col-xs-10 pull-right">
@@ -31,6 +29,16 @@
                     <div class="alert alert-success alert-dismissable fade" role="alert">
                         <button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <strong>{{ session('success') }}</strong>
+                    </div>
+                @elseif(session('error'))
+                    <div class="alert alert-danger alert-dismissable fade" role="alert">
+                        <button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <strong>{{ session('success') }}</strong>
+                    </div>
+                @elseif(session('notice'))
+                    <div class="alert alert-info alert-dismissable fade" role="alert">
+                        <button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <strong>{{ session('notice') }}</strong>
                     </div>
                 @endif
                 {{--  Pagination Nav  --}}

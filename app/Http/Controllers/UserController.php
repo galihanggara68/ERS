@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest, App\Http\Requests\SessionRequest;
+use Sentinel, Session, App\User;
 
 class UserController extends Controller
 {
@@ -11,6 +13,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function login(){
+        if($user = Sentinel::check()){
+            Session::flash('notice', 'Anda telah login '.$user->email);
+            return redirect('/dashboard');
+        }else{
+            return view('forms.login');
+        }
+    }
+
+    public function login_store(SessionRequest $request){
+        if($user = Sentinel::authenticate($request->all())){
+            Session::flash('notice', 'Selamat datang '. $user->email);
+            return redirect()->intended('/dashboard');
+        }else{
+            Session::flash('error', 'Login Gagal');
+            return view('forms.login');
+        }
+    }
+
+    public function logout(){
+        Sentinel::logout();
+        Session::flash('notice', 'Logout Success');
+        return redirect('/');
+    }
+
     public function index()
     {
         //
@@ -23,7 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.register');
     }
 
     /**
@@ -32,9 +60,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        Sentinel::registerAndActivate($request->all());
+        Session::flash('success', 'Suskses Mebuat User');
+        return redirect('/dashboard/user');
     }
 
     /**
@@ -79,6 +109,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        Session::flash('success', 'Sukses Menghapus User');
+        return redirect()->back();
     }
 }

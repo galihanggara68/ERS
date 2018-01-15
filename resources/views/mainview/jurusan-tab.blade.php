@@ -19,7 +19,7 @@ Data Jurusan
             <td>{{ link_to_route('jurusan.edit', 'Edit', $jurusan->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['JurusanController@destroy', $jurusan->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

@@ -31,12 +31,20 @@ Data Guru
             <div class="row">
                 <div class="col-xs-3">{{ Form::label('mapel', 'Mengajar :') }}</div>
                 @if(isset($guru->mapel))
-                    @foreach($guru->mapel as $mapel)
-                        <div class="row col-xs-12">
-                            <div class="col-xs-6">{{ link_to_route('kelas.show', $guru->mengajar[$loop->index]->nama, $guru->mengajar[$loop->index]->id) }}</div>
-                            <div class="col-xs-6">{{ $mapel->nama }}</div>
-                        </div>
-                    @endforeach
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <th>Kelas</th>
+                        <th>Mata Pelajaran</th>
+                    </thead>
+                    <tbody>
+                        @foreach($guru->mengajar as $mengajar)
+                            <tr>
+                                <td>{{ link_to_route('kelas.show', $mengajar->nama, $mengajar->id) }}</td>
+                                <td>{{ $guru->mapel[$loop->index]->nama }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 @endif
             </div>
         </div>
@@ -56,7 +64,7 @@ Data Guru
             <td>{{ link_to_route('guru.edit', 'Edit', $guru->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['GuruController@destroy', $guru->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

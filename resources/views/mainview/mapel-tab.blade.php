@@ -19,7 +19,7 @@ Data Jurusan
             <td>{{ link_to_route('mapel.edit', 'Edit', $mapel->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['MapelController@destroy', $mapel->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

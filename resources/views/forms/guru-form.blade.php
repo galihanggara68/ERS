@@ -77,7 +77,7 @@ Edit Data Guru
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    {{ link_to('/dashboard', 'Batal', ['class' => 'btn btn-default btn-block']) }}
+                    {{ link_to(URL::previous(), 'Batal', ['class' => 'btn btn-default btn-block']) }}
                 </div>
                 <div class="col-xs-6">
                     {{ Form::submit(isset($guru->id) ? 'Ubah' : 'Tambah', ['class' => 'btn btn-info btn-block']) }}

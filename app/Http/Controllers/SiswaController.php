@@ -16,14 +16,6 @@ class SiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(){
-        $cred = [
-            'email' => 'galih@mail.com',
-            'password' => 'admin123'
-        ];
-        Sentinel::authenticate($cred);
-    }
-
     public function index()
     {
         //
@@ -36,7 +28,14 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('forms.siswa-form');
+        $siswa = new Siswa;
+        $kelas = Kelas::all()->pluck('nama', 'id')->toArray();
+        $jurusan = Jurusan::all()->pluck('nama', 'id')->toArray();
+        return view('forms.siswa-form', [
+            'siswa' => $siswa, 
+            'kelas' => $kelas, 
+            'jurusan' => $jurusan
+        ]);
     }
 
     /**

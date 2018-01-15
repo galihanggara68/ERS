@@ -8,6 +8,7 @@ Data Siswa
 @if(isset($siswa))
     <div class="panel panel-info">
         <div class="panel-heading">
+            {{ link_to(URL::previous(), '', ['class' => 'btn btn-default glyphicon glyphicon-chevron-left']) }}
             <h3>{{ $siswa->nama }}</h3>
         </div>
         <div class="panel-body">
@@ -52,7 +53,7 @@ Data Siswa
             <td>{{ link_to_route('siswa.edit', 'Edit', $siswa->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['SiswaController@destroy', $siswa->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

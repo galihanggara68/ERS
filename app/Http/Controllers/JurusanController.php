@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jurusan, Validator, Session;
 
 class JurusanController extends Controller
 {
@@ -23,7 +24,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.jurusan-form');
     }
 
     /**
@@ -34,7 +35,15 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Jurusan::create($request->all());
+        Session::flash('success', 'Sukses Membuat Jurusan');
+        return redirect('/dashboard/jurusan');
     }
 
     /**
@@ -56,7 +65,8 @@ class JurusanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jurusan = Jurusan::find($id);
+        return view('forms.jurusan-form', compact('jurusan'));
     }
 
     /**
@@ -68,7 +78,15 @@ class JurusanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Jurusan::find($id)->update($request->all());
+        Session::flash('success', 'Sukses Mengupdate Jurusan');
+        return redirect('/dashboard/jurusan');
     }
 
     /**
@@ -79,6 +97,8 @@ class JurusanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Jurusan::destroy($id);
+        Session::flash('success', 'Sukses Menghapus Jurusan');
+        return redirect('/dashboard/jurusan');
     }
 }

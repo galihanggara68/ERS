@@ -33,6 +33,7 @@ Data User
             <tr>
                 <th class="col-xs-2">Name</th>
                 <th class="col-xs-3">Email</th>
+                <th class="col-xs-1">{{ link_to_route('user.create', '', null, ['class' => 'btn btn-default glyphicon glyphicon-plus']) }}</th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +44,7 @@ Data User
             <td>{{ link_to_route('user.edit', 'Edit', $user->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['UserController@destroy', $user->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

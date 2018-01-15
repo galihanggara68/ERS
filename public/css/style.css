@@ -1,3 +1,40 @@
+/* Buttons */
+.btn-outline-default{
+    background: none;
+    color: grey;
+    border: 1.2px solid grey;
+}
+
+.btn-outline-info{
+    background: none;
+    color: grey;
+    border: 1.2px solid rgb(114, 213, 238);
+}
+
+.btn-outline-danger{
+    background: none;
+    color: grey;
+    border: 1.2px solid rgb(228, 82, 82);
+}
+
+.btn-outline-primary{
+    background: none;
+    color: grey;
+    border: 1.2px solid rgb(61, 106, 252);
+}
+
+.btn-outline-success{
+    background: none;
+    color: grey;
+    border: 1.2px solid rgb(157, 238, 126);
+}
+
+.btn{
+    -moz-transition: all 200ms;
+    -webkit-transition: all 200ms;
+    transition: all 200ms;
+}
+
 .sidenav{
     height: 100%;
     width: 20%;

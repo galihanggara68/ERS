@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mapel, Validator, Session;
 
 class MapelController extends Controller
 {
@@ -23,7 +24,7 @@ class MapelController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.mapel-form');
     }
 
     /**
@@ -34,7 +35,15 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Mapel::create($request->all());
+        Session::flash('success', 'Sukses Membuat Mapel');
+        return redirect('/dashboard/mapel');
     }
 
     /**
@@ -56,7 +65,8 @@ class MapelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mapel = Mapel::find($id);
+        return view('forms.mapel-form', compact('mapel'));
     }
 
     /**
@@ -68,7 +78,15 @@ class MapelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Mapel::find($id)->update($request->all());
+        Session::flash('success', 'Sukses Mengupdate Mapel');
+        return redirect('/dashboard/mapel');
     }
 
     /**
@@ -79,6 +97,8 @@ class MapelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mapel::destroy($id);
+        Session::flash('success', 'Sukses Menghapus Mapel');
+        return redirect('/dashboard/mapel');
     }
 }

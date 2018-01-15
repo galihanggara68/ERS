@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(["prefix" => 'dashboard'], function(){
+Route::group(['prefix' => 'dashboard', 'middleware' => 'sentinel'], function(){
     Route::get('/', 'MainController@siswa');
     Route::get('/kelas', 'MainController@kelas');
     Route::get('/guru', 'MainController@guru');
@@ -33,3 +33,8 @@ Route::group(["prefix" => 'dashboard'], function(){
     Route::resource('/nilai', 'NilaiController', ['except' => ['index']]);
     Route::resource('/user', 'UserController', ['except' => ['index']]);
 });
+
+// Users Login and Register
+Route::get('login', 'UserController@login')->name('login');
+Route::post('login', 'UserController@login_store')->name('login.store');
+Route::get('logout', 'UserController@logout')->name('logout');

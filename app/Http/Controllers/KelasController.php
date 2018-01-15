@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Kelas;
+use App\Kelas, Validator, Session;
 
 
 class KelasController extends Controller
@@ -25,7 +25,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.kelas-form');
     }
 
     /**
@@ -36,7 +36,15 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Kelas::create($request->all());
+        Session::flash('success', 'Sukses Membuat Kelas');
+        return redirect('/dashboard/kelas');
     }
 
     /**
@@ -59,7 +67,8 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        return view('forms.kelas-form', compact('kelas'));
     }
 
     /**
@@ -71,7 +80,15 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = Validator::make($request->all(), [
+            'nama' => 'required'
+        ]);
+        if($valid->fails()) return back()
+        ->withErrors($valid)
+        ->withInput();
+        Kelas::find($id)->update($request->all());
+        Session::flash('success', 'Sukses Mengupdate Kelas');
+        return redirect('/dashboard/kelas');
     }
 
     /**
@@ -82,6 +99,8 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kelas::destroy($id);
+        Session::flash('success', 'Sukses Menghapus Kelas');
+        return redirect('/dashboard/kelas');
     }
 }

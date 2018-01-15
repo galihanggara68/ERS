@@ -17,3 +17,18 @@ $('.mapel-group').on('click', '#__delmapel', function(){
     }
     $(this).closest('.row').remove();
 });
+
+// Logout
+$('#logout').on('click', function(e){
+    if(window.confirm('Apakah anda yakin ?') == false){
+        return false;
+    }
+    return true;
+});
+
+$('#delete').on('click', function(e){
+    if(window.confirm('Apakah anda yakin ?') == false){
+        return false;
+    }
+    return true;
+});

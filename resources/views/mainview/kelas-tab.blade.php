@@ -8,6 +8,7 @@ Data Kelas
 @if(isset($kelas))
     <div class="panel panel-info">
         <div class="panel-heading">
+            {{ link_to(URL::previous(), '', ['class' => 'btn btn-default glyphicon glyphicon-chevron-left']) }}
             <h3>{{ $kelas->nama }}</h3>
         </div>
         <div class="panel-body">
@@ -22,13 +23,24 @@ Data Kelas
             <div class="row">
                     <div class="col-xs-3">{{ Form::label('siswa', 'Siswa :') }}</div>
                     @if(isset($kelas->siswa))
-                        @foreach($kelas->siswa as $siswa)
-                        <div class="row col-xs-12">
-                            <div class="col-xs-4">{{ $siswa->nama }}</div>
-                            <div class="col-xs-4">{{ $siswa->jurusan->nama }}</div>
-                            <div class="col-xs-4">{{ $siswa->status }}</div>
-                        </div>
-                        @endforeach
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <th>NIS</th>
+                                <th>Nama</th>
+                                <th>Jurusan</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody>
+                                @foreach($kelas->siswa as $siswa)
+                                    <tr>
+                                        <td>{{ $siswa->nis }}</td>
+                                        <td>{{ $siswa->nama }}</td>
+                                        <td>{{ $siswa->jurusan->nama }}</td>
+                                        <td>{{ $siswa->status }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     @endif
             </div>
         </div>
@@ -48,7 +60,7 @@ Data Kelas
             <td>{{ link_to_route('kelas.edit', 'Edit', $kelas->id, ['class' => 'btn btn-default']) }}</td>
             <td>
                 {{ Form::open(['action' => ['KelasController@destroy', $kelas->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger']) }}
+                    {{ Form::submit('Hapus', ['class' => 'btn btn-danger', 'id' => 'delete']) }}
                 {{ Form::close() }}
             </td>
         </tr>

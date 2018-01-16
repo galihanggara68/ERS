@@ -1,1 +1,5 @@
 .env
+vendor/
+storage/
+storage/framework/
+storage/logs

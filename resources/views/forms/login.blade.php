@@ -30,8 +30,14 @@
 
             <div class="form-group">
                 <div class="row input-group">
-                    {{ Form::label('remember', 'Remember Me', ['class' => '']) }}
+                    {{ Form::label('remember', 'Ingat Saya', ['class' => '']) }}
                     {{ Form::checkbox('remember', null, ['class' => 'form-control']) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row input-group">
+                    {{ link_to_route('reminder.create', 'Lupa Password', null,['class' => 'btn btn-link']) }}
                 </div>
             </div>
 

@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'user.store']) }}
+    {{ isset($user) ? Form::open(['route' => ['user.update', $user->id], 'method' => 'PUT']) : Form::open(['route' => 'user.store']) }}
         <div class="form-group">
             {{ Form::label('first_name', 'Nama Depan', ['class' => 'col-lg-4 control-label']) }}
             <div class="col-lg-5">
-                {{ Form::text('first_name', null, ['class' => 'form-control']) }}
+                {{ Form::text('first_name', isset($user->first_name) ? $user->first_name : null, ['class' => 'form-control']) }}
                 <div class="text-danger">{{ $errors->first('firs_name') }}</div>
             </div>
             <div class="clear"></div>
@@ -18,7 +18,7 @@
         <div class="form-group">
             {{ Form::label('last_name', 'Nama Belakang', ['class' => 'col-lg-4 control-label']) }}
             <div class="col-lg-5">
-                {{ Form::text('last_name', null, ['class' => 'form-control']) }}
+                {{ Form::text('last_name', isset($user->last_name) ? $user->last_name : null, ['class' => 'form-control']) }}
                 <div class="text-danger">{{ $errors->first('last_name') }}</div>
             </div>
             <div class="clear"></div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             {{ Form::label('email', 'Email', ['class' => 'col-lg-4 control-label']) }}
             <div class="col-lg-5">
-                {{ Form::email('email', null, ['class' => 'form-control']) }}
+                {{ Form::email('email', isset($user->email) ? $user->email : null, ['class' => 'form-control']) }}
                 <div class="text-danger">{{ $errors->first('email') }}</div>
             </div>
             <div class="clear"></div>
@@ -53,7 +53,7 @@
 
         <div class="form-group">
             <div class="col-lg-5 center-block">
-                {{ Form::submit('Registrasi', ['class' => 'btn btn-lg btn-default']) }}
+                {{ Form::submit(isset($user) ? 'Update' : 'Registrasi', ['class' => 'btn btn-lg btn-default']) }}
             </div>
         </div>
     {{ Form::close() }}

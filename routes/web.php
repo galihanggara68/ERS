@@ -38,3 +38,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'sentinel'], function(){
 Route::get('login', 'UserController@login')->name('login');
 Route::post('login', 'UserController@login_store')->name('login.store');
 Route::get('logout', 'UserController@logout')->name('logout');
+
+// Forgot Password
+Route::get('forgot-password', 'UserController@forgot_create')->name('reminder.create');
+Route::post('forgot-password', 'UserController@forgot_store')->name('reminder.store');
+Route::get('forgot-password/{id}/{token}', 'UserController@forgot_edit')->name('reminder.edit');
+Route::put('forgot-password/{id}/{token}', 'UserController@forgot_update')->name('reminder.update');

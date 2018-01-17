@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Events\\ReminderEvent' => $baseDir . '/app/Events/ReminderEvent.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Guru' => $baseDir . '/app/Guru.php',
     'App\\GuruKelas' => $baseDir . '/app/GuruKelas.php',
@@ -24,11 +25,14 @@ return array(
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\SentinelMiddleware' => $baseDir . '/app/Http/Middleware/SentinelMiddleware.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\ReminderRequest' => $baseDir . '/app/Http/Requests/ReminderRequest.php',
     'App\\Http\\Requests\\SessionRequest' => $baseDir . '/app/Http/Requests/SessionRequest.php',
     'App\\Http\\Requests\\SiswaRequest' => $baseDir . '/app/Http/Requests/SiswaRequest.php',
     'App\\Http\\Requests\\UserRequest' => $baseDir . '/app/Http/Requests/UserRequest.php',
     'App\\Jurusan' => $baseDir . '/app/Jurusan.php',
     'App\\Kelas' => $baseDir . '/app/Kelas.php',
+    'App\\Listeners\\ReminderEventListener' => $baseDir . '/app/Listeners/ReminderEventListener.php',
+    'App\\Mail\\ReminderMailable' => $baseDir . '/app/Mail/ReminderMailable.php',
     'App\\Mapel' => $baseDir . '/app/Mapel.php',
     'App\\Nilai' => $baseDir . '/app/Nilai.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

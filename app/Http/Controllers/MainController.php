@@ -17,12 +17,26 @@ class MainController extends Controller
 
     public function siswa()
     {
-        $siswa = Siswa::paginate(15);
+        $siswa = null;
+        if(Sentinel::inRole('admin')){
+            $siswa = Siswa::paginate(15);
+        }else{
+            $siswa = Siswa::with('diajar')->paginate(15);
+        }
+        dd($siswa);
         return view('mainview.siswa-tab', ['data' => $siswa]);
     }
 
     public function kelas(){
-        $kelas = Kelas::paginate(15);
+        $kelas = null;
+        if(Sentinel::inRole('admin')){
+            $kelas = Kelas::paginate(15);
+        }else{
+            $user = Sentinel::check();
+            $user = User::find($user->id);
+            $guru = $user->userable;
+            $kelas = $guru->mengajar;
+        }
         return view('mainview.kelas-tab', ['data' => $kelas]);
     }
 
@@ -43,7 +57,7 @@ class MainController extends Controller
     }
 
     public function user(){
-        $user = User::paginate(15);
+        $user = Sentinel::getUserRepository()->paginate(10);
         return view('mainview.user-tab', ['data' => $user]);
     }
 

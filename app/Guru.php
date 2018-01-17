@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guru extends Model
 {
-    protected $fillable = ['nip', 'nama'];
+    protected $fillable = ['nip', 'nama', 'user_id'];
     public $timestamps = false;
 
     public function walikelas(){
@@ -29,6 +29,10 @@ class Guru extends Model
 
     public function nilai(){
         return $this->belongsToMany('App\Siswa', 'nilais');
+    }
+
+    public function user(){
+        return $this->morphOne('App\User', 'userable');
     }
 
     //Validator

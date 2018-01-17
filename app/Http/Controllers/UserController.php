@@ -118,7 +118,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Sentinel::findById($id);
+        return view('mainview.user-tab', ['user' => $user]);
     }
 
     /**
@@ -129,7 +130,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = Sentinel::findById($id);
         return view('forms.register', compact('user'));
     }
 
@@ -142,7 +143,8 @@ class UserController extends Controller
      */
     public function update(SessionRequest $request, $id)
     {
-        User::find($id)->update($request->all());
+        $user = Sentinel::findById($id);
+        $user = Sentinel::update($user, $request->all());
         Session::flash('success', 'Suskses Mengupdate User');
         return redirect('/dashboard/user');
     }
@@ -155,7 +157,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = Sentinel::findById($id);
+        $user->delete();
         Session::flash('success', 'Sukses Menghapus User');
         return redirect()->back();
     }

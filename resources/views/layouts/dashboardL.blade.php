@@ -14,11 +14,10 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             {{ link_to('/dashboard', 'Siswa') }}
             {{ link_to('/dashboard/kelas', 'Kelas') }}
-            {{ link_to('/dashboard/guru', 'Guru') }}
+            @if(Sentinel::inRole('admin')){{ link_to('/dashboard/guru', 'Guru') }}@endif
             {{ link_to('/dashboard/jurusan', 'Jurusan') }}
-            {{ link_to('/dashboard/mapel', 'Mapel') }}
-            {{ link_to('/dashboard/nilai', 'Nilai') }}
-            {{ link_to('/dashboard/user', 'User') }}
+            @if(Sentinel::inRole('admin')){{ link_to('/dashboard/mapel', 'Mapel') }}@endif
+            @if(Sentinel::inRole('admin')){{ link_to('/dashboard/user', 'User') }}@endif
             {{ link_to_route('logout', 'Logout', null, ['class' => 'btn btn-lg btn-danger btn-outline-default', 'id' => 'logout']) }}
         </div>
         <span onclick="openNav()" class="opennav"><i class="glyphicon glyphicon-menu-hamburger btn btn-default"></i></span>

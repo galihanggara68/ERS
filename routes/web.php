@@ -15,14 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'sentinel'], function(){
-    Route::get('/', 'MainController@siswa');
-    Route::get('/kelas', 'MainController@kelas');
-    Route::get('/guru', 'MainController@guru');
-    Route::get('/mapel', 'MainController@mapel');
-    Route::get('/user', 'MainController@user');
-    Route::get('/jurusan', 'MainController@jurusan');
-    Route::get('/nilai', 'MainController@nilai');
+Route::group(['prefix' => 'dashboard', 'middleware' => ['sentinel', 'sentinel.role']], function(){
+    Route::get('/', 'MainController@siswa')->name('main');
+    Route::get('/kelas', 'MainController@kelas')->name('main.kelas');
+    Route::get('/guru', 'MainController@guru')->name('main.guru');
+    Route::get('/mapel', 'MainController@mapel')->name('main.mapel');
+    Route::get('/user', 'MainController@user')->name('main.user');
+    Route::get('/jurusan', 'MainController@jurusan')->name('main.jurusan');
+    Route::get('/nilai', 'MainController@nilai')->name('main.nilai');
 
     // Resource Controller
     Route::resource('/siswa', 'SiswaController', ['except' => ['index']]);

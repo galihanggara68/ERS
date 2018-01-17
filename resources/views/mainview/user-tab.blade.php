@@ -29,6 +29,29 @@ Data User
                 <div class="col-xs-3">{{ Form::label('email', 'Email :') }}</div>
                 <div class="col-xs-9">{{ $user->email }}</div>
             </div>
+            <div class="row">
+                <div class="col-xs-3">{{ Form::label('role_permissions', 'Role Permissions :') }}</div>
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Permission</th>
+                            <th>Diizinkan</th>
+                        </thead>
+                        <tbody>
+                            @if($user->roles)
+                                @foreach($user->roles as $role)
+                                    @foreach($role->permissions as $key => $perms)
+                                        <tr>
+                                            <td>{{ $key }}</td>
+                                            <td>{{ ($perms) ? 'Ya' : 'Tidak' }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @else

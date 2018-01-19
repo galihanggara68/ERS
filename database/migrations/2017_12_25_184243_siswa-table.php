@@ -13,15 +13,20 @@ class SiswaTable extends Migration
      */
     public function up()
     {
-        Schema::create('siswas', function(Blueprint $table){
+        Schema::create('siswa', function(Blueprint $table){
             $table->increments('id');
             $table->integer('nis');
 			$table->string('nama');
             $table->integer('kelas_id');
             $table->integer('jurusan_id');
-			$table->string('status');
+            $table->char('jenis_kelamin'); 
+            $table->string('tpt_lahir');
+            $table->date('tgl_lahir'); 
+            $table->string('agama');
+            $table->string('no_tlp');
+            $table->string('status');
         });
-        DB::statement("alter table siswas add column tahun_ajaran year");
+        DB::statement("alter table siswa add column tahun_ajaran year");
     }
 
     /**
@@ -31,6 +36,6 @@ class SiswaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('siswas');
+        Schema::drop('siswa');
     }
 }

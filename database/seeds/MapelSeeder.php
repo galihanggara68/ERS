@@ -11,9 +11,10 @@ class MapelSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 5; $i++){
-            DB::table('mapels')->insert([
-                'nama' => "Mapel ".$i
+        for($i = 1; $i < 6; $i++){
+            DB::table('mapel')->insert([
+                'kode' => 'MAPEL'.$i,
+                'nama' => "Mapel ".$i,
             ]);
         }
     }

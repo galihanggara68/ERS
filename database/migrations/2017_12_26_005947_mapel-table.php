@@ -13,8 +13,8 @@ class MapelTable extends Migration
      */
     public function up()
     {
-        Schema::create('mapels', function(Blueprint $table){
-            $table->increments('id');
+        Schema::create('mapel', function(Blueprint $table){
+            $table->string('kode')->unique();
             $table->string('nama');
         });
     }
@@ -26,6 +26,6 @@ class MapelTable extends Migration
      */
     public function down()
     {
-        Schema::drop('mapels');
+        Schema::drop('mapel');
     }
 }

@@ -11,10 +11,10 @@ class KelasSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 5; $i++){
+        for($i = 1; $i < 6; $i++){
             DB::table('kelas')->insert([
                 'nama' => "XI MMD ".$i,
-                'guru_id' => DB::table('gurus')->get()[rand()%3]->id
+                'guru_id' => DB::table('guru')->get()[rand()%3]->id
             ]);
         }
     }

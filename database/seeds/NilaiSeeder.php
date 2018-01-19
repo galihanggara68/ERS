@@ -12,13 +12,11 @@ class NilaiSeeder extends Seeder
     public function run()
     {
         for($i = 0; $i < 40; $i++){
-            DB::table('nilais')->insert([
-                'guru_id' => DB::table('gurus')->get()[rand()%3]->id,
-                'mapel_id' => DB::table('mapels')->get()[rand()%5]->id,
-                'siswa_id' => DB::table('siswas')->get()[rand()%19]->id, 
-                'pengetahuan' => (rand()%100)+60,
-                'keterampilan' => (rand()%100)+60,
-                'sisosp' => (rand()%100)+60
+            DB::table('nilai')->insert([
+                'guru_id' => DB::table('guru')->get()[rand()%3]->id,
+                'kode_mapel' => DB::table('mapel')->get()[rand()%5]->kode,
+                'siswa_id' => DB::table('siswa')->get()[rand()%19]->id, 
+                'kd' => 'MAPEL1'
             ]);
         }
     }

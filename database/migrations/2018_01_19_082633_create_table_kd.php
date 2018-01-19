@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldUserToGuruTable extends Migration
+class CreateTableKd extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddFieldUserToGuruTable extends Migration
      */
     public function up()
     {
-        Schema::table('gurus', function (Blueprint $table) {
-            $table->integer('user_id');
+        Schema::create('kd', function (Blueprint $table) {
+            $table->string('kode');
+            $table->string('kode_mapel');
         });
     }
 
@@ -25,8 +26,6 @@ class AddFieldUserToGuruTable extends Migration
      */
     public function down()
     {
-        Schema::table('gurus', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('kd');
     }
 }

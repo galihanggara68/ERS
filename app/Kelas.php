@@ -10,12 +10,8 @@ class Kelas extends Model
     protected $fillable = ['nama', 'guru_id'];
     public $timestamps = false;
 
-    public function guru(){
-        return $this->belongsTo('App\Guru', 'guru_id');
-    }
-
-    public function guruKelas(){
-        return $this->belongsToMany('App\Guru', 'gurukelas');
+    public function mapel(){
+        return $this->belongsToMany(Mapel, kelas_mapel);
     }
 
     public function siswa(){

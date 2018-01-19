@@ -13,14 +13,12 @@ class NilaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function(Blueprint $table){
+        Schema::create('nilai', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('guru_id')->unsigned();
-            $table->integer('mapel_id')->unsigned();
+            $table->string('kode_mapel');
             $table->integer('siswa_id')->unsigned();
-            $table->integer('pengetahuan');
-            $table->integer('keterampilan');
-            $table->integer('sisosp');
+            $table->string('kd');
+            $table->integer('nilai');
         });
     }
 
@@ -31,6 +29,6 @@ class NilaiTable extends Migration
      */
     public function down()
     {
-        Schema::drop('nilais');
+        Schema::drop('nilai');
     }
 }

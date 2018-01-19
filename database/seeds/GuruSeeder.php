@@ -11,19 +11,46 @@ class GuruSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('gurus')->insert(
+        DB::table('guru')->insert(
         [
             'nip' => 201,
-            'nama' => "Ujang"
+            'nama' => "Ujang",
+            'jenis_kelamin' => 'L',
+            'tpt_lahir' => 'Jakarta',
+            'tgl_lahir' => '1999/1/1',
+            'agama' => 'Islam',
+            'pangkat' => 'Guru',
+            'jabatan' => 'Guru Dewasa',
+            'status' => 'Aktif',
+            'no_tlp' => '088888889',
+            'user_id' => 0
         ]);
-        DB::table('gurus')->insert(
+        DB::table('guru')->insert(
         [
             'nip' => 202,
-            'nama' => "Umar"
+            'nama' => "Umar",
+            'jenis_kelamin' => 'L',
+            'tpt_lahir' => 'Jakarta',
+            'tgl_lahir' => '1999/1/1',
+            'agama' => 'Islam',
+            'pangkat' => 'Guru',
+            'jabatan' => 'Guru Dewasa',
+            'status' => 'Aktif',
+            'no_tlp' => '088888889',
+            'user_id' => 0
         ]);
-        DB::table('gurus')->insert([
+        DB::table('guru')->insert([
             'nip' => 203,
-            'nama' => "Usep"
+            'nama' => "Usep",
+            'jenis_kelamin' => 'L',
+            'tpt_lahir' => 'Jakarta',
+            'tgl_lahir' => '1999/1/1',
+            'agama' => 'Islam',
+            'pangkat' => 'Guru',
+            'jabatan' => 'Guru Dewasa',
+            'status' => 'Aktif',
+            'no_tlp' => '088888889',
+            'user_id' => 0
         ]);
     }
 }

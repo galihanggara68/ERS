@@ -7,13 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddColumnUserable' => $baseDir . '/database/migrations/2018_01_17_070122_add_column_userable.php',
-    'AddFieldUserToGuruTable' => $baseDir . '/database/migrations/2018_01_17_042519_add_field_user_to_guru_table.php',
+    'CreateTableKd' => $baseDir . '/database/migrations/2018_01_19_082633_create_table_kd.php',
+    'CreateTableKelaguruMapel' => $baseDir . '/database/migrations/2018_01_18_084458_create_table_kelaguru_mapel.php',
+    'CreateTableKelasMapel' => $baseDir . '/database/migrations/2018_01_18_084420_create_table_kelas_mapel.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
     'GuruKelasSeeder' => $baseDir . '/database/seeds/GuruKelasSeeder.php',
-    'GuruKelasTable' => $baseDir . '/database/migrations/2017_12_26_010040_guru_kelas-table.php',
     'GuruSeeder' => $baseDir . '/database/seeds/GuruSeeder.php',
     'GuruTable' => $baseDir . '/database/migrations/2017_12_26_005928_guru-table.php',
     'Hamcrest\\Arrays\\IsArray' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',

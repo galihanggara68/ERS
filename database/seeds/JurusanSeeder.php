@@ -11,15 +11,15 @@ class JurusanSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('jurusans')->insert([
+        DB::table('jurusan')->insert([
             'nama' => "Multimedia",
             'guru_id' => 1
         ]);
-        DB::table('jurusans')->insert([
+        DB::table('jurusan')->insert([
             'nama' => "Teknik Sepeda Motor",
             'guru_id' => 2
         ]);
-        DB::table('jurusans')->insert([
+        DB::table('jurusan')->insert([
             'nama' => "Administrasi Perkantoran",
             'guru_id' => 3
         ]);

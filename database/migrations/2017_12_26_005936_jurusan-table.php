@@ -13,7 +13,7 @@ class JurusanTable extends Migration
      */
     public function up()
     {
-        Schema::create('jurusans', function(Blueprint $table){
+        Schema::create('jurusan', function(Blueprint $table){
             $table->increments('id');
             $table->string('nama');
             $table->integer('guru_id')->unsigned();
@@ -27,6 +27,6 @@ class JurusanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('jurusans');
+        Schema::drop('jurusan');
     }
 }

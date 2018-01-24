@@ -40,19 +40,31 @@ class RoleSeeder extends Seeder
         ];
         
         // Insert admin role
-        Sentinel::getRoleRepository()->createModel()
-        ->fill($role_admin)->save();
+        // Sentinel::getRoleRepository()->createModel()
+        // ->fill($role_admin)->save();
 
-        // Insert guru role
-        Sentinel::getRoleRepository()->createModel()
-        ->fill($role_guru)->save();
+        // // Insert guru role
+        // Sentinel::getRoleRepository()->createModel()
+        // ->fill($role_guru)->save();
 
         $admin = Sentinel::findRoleByName('Admin');
-        $user = Sentinel::getUserRepository()->where('email', 'galih@mail.com')->first();
+        $user = Sentinel::registerAndActivate([
+            'email' => 'galih@mail.com',
+            'password' => 'admin123',
+            'userable_id' => 0,
+            'userable_type' => 'App\Guru'
+        ]); 
+        //$user = Sentinel::getUserRepository()->where('email', 'galih@mail.com')->first();
         $user->roles()->attach($admin);
 
         $guru = Sentinel::findRoleByName('Guru');
-        $user = Sentinel::getUserRepository()->where('email', 'galihanggara@mail.com')->first();
+        $user = Sentinel::registerAndActivate([
+            'email' => 'galihanggara@mail.com',
+            'password' => 'admin123',
+            'userable_id' => 0,
+            'userable_type' => 'App\Guru'
+        ]); 
+        //$user = Sentinel::getUserRepository()->where('email', 'galihanggara@mail.com')->first();
         $user->roles()->attach($guru);
     }
 }

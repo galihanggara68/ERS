@@ -30,7 +30,10 @@ Data Siswa
             </div>
         </div>
     </div>
-@else
+@elseif(isset($data))
+    <div class="row">
+        <div class="col-md-5"></div>
+    </div>
     <table class="table table-striped table-hover table-condensed table-fixed">
         <thead>
             <tr>
@@ -60,5 +63,11 @@ Data Siswa
         @endforeach
         </tbody>
     </table>
+@else
+    {{ Form::open(['url' => 'api/siswa', 'method' => 'POST', 'id' => 'form-pilih']) }}
+    <div class="col-md-5">
+        {{ Form::select('mapel_id', $list, null, ['class' => 'form-control', 'id' => 'mapel_id']) }}
+    </div>
+    {{ Form::close() }}
 @endif
 @endsection

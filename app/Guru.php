@@ -27,11 +27,15 @@ class Guru extends Model
     }
 
     public function mapel(){
-        return $this->belongsToMany('App\Mapel', 'guru_mapel', 'guru_id', 'guru_id');
+        return $this->belongsToMany('App\Mapel', 'guru_mapel', 'guru_id', 'kode_mapel');
     }
 
     public function siswa(){
-        return $this->belongsToMany('App\Siswa', 'guru_mapel', 'guru_id', 'guru_id');
+        return $this->belongsToMany('App\Siswa', 'guru_mapel', 'guru_id', 'siswa_id');
+    }
+
+    public function kelas(){
+        return $this->belongsToMany('App\Kelas', 'guru_kelas');
     }
 
     public function user(){
@@ -42,7 +46,14 @@ class Guru extends Model
     public static function valid(){
         return [
             'nip' => 'required|max:13',
-            'nama' => 'required|max:28'
+            'nama' => 'required|max:28',
+            'jenis_kelamin'=> 'required',
+            'tpt_lahir' => 'required',
+            'tgl_lahir' => 'required|date',
+            'agama' => 'required|max:12|min:5',
+            'no_tlp' => 'required|max:13|min:1',
+            'pangkat' => 'required|max:12|min:4',
+            'jabatan' => 'required|max:12|min:4'
         ];
     }
 }

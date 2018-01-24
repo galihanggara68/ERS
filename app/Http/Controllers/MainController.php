@@ -17,14 +17,15 @@ class MainController extends Controller
 
     public function siswa()
     {
-        $siswa = null;
         if(Sentinel::inRole('admin')){
             $siswa = Siswa::paginate(15);
+            return view('mainview.siswa-tab', ['data' => $siswa]);
         }else{
-            $siswa = Siswa::with('diajar')->paginate(15);
+            $user = Sentinel::check();
+            $guru = User::find($user->id)->userable;
+            $list = $guru->mapel->pluck('nama', 'kode')->toArray();
+            return view('mainview.siswa-tab', compact('guru', 'list'));
         }
-        dd($siswa);
-        return view('mainview.siswa-tab', ['data' => $siswa]);
     }
 
     public function kelas(){

@@ -11,7 +11,11 @@ class Kelas extends Model
     public $timestamps = false;
 
     public function mapel(){
-        return $this->belongsToMany(Mapel, kelas_mapel);
+        return $this->belongsToMany('App\Mapel', 'kelas_mapel', 'kelas_id', 'kode_mapel');
+    }
+
+    public function guru(){
+        return $this->belongsToMany('App\Guru', 'guru_kelas');
     }
 
     public function siswa(){

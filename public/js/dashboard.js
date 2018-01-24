@@ -32,3 +32,15 @@ $('#delete').on('click', function(e){
     }
     return true;
 });
+
+$('#mapel_id').on('click', function(){
+    $.ajax({
+        url: "api/siswa",
+        type: "POST",
+        dataType: "JSON",
+        data: {'mapel_id':$(this).val()},
+        success: function(data){
+            $('#form-pilih').append(data);
+        }
+    });
+});

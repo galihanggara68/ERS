@@ -24,6 +24,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['sentinel', 'sentinel.ro
     Route::get('/jurusan', 'MainController@jurusan')->name('main.jurusan');
     Route::get('/nilai', 'MainController@nilai')->name('main.nilai');
 
+    //Each Guru
+    Route::post('/ajax_siswa', 'MainController@ajax_siswa');
+
     // Resource Controller
     Route::resource('/siswa', 'SiswaController', ['except' => ['index']]);
     Route::resource('/kelas', 'KelasController', ['except' => ['index']]);

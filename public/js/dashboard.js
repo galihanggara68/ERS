@@ -33,14 +33,28 @@ $('#delete').on('click', function(e){
     return true;
 });
 
-$('#mapel_id').on('click', function(){
+$('#mapel_id').on('change', function(){
     $.ajax({
         url: "api/siswa",
         type: "POST",
         dataType: "JSON",
         data: {'mapel_id':$(this).val()},
         success: function(data){
+            $('#dropdown-kelas').remove();
             $('#form-pilih').append(data);
+        }
+    });
+});
+
+$('#form-pilih').on('change', '#kelas_id', function(){
+    $.ajax({
+        url: "api/siswa",
+        type: "POST",
+        dataType: "JSON",
+        data: {'kelas_id':$(this).val()},
+        success: function(data){
+            $('#content-siswa').empty();
+            $('#content-siswa').append(data);
         }
     });
 });

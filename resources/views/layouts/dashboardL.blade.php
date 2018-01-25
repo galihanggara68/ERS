@@ -19,6 +19,9 @@
             @if(Sentinel::inRole('admin')){{ link_to('/dashboard/mapel', 'Mapel') }}@endif
             @if(Sentinel::inRole('admin')){{ link_to('/dashboard/user', 'User') }}@endif
             {{ link_to_route('logout', 'Logout', null, ['class' => 'btn btn-lg btn-danger btn-outline-default', 'id' => 'logout']) }}
+            <div class="col-md-12" align="center">
+                Login as <b><span class="text-info">{{ Sentinel::getUser()->email }}</span></b>
+            </div>
         </div>
         <span onclick="openNav()" class="opennav"><i class="glyphicon glyphicon-menu-hamburger btn btn-default"></i></span>
         <div class="content col-xs-10 pull-right">

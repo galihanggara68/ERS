@@ -29,16 +29,16 @@ class MainController extends Controller
     }
 
     public function kelas(){
-        $kelas = null;
         if(Sentinel::inRole('admin')){
             $kelas = Kelas::paginate(15);
+            return view('mainview.kelas-tab', ['data' => $kelas]);
         }else{
             $user = Sentinel::check();
-            $user = User::find($user->id);
-            $guru = $user->userable;
-            $kelas = $guru->mengajar;
+            $guru = User::find($user->id)->userable;
+            $list = $guru->mapel/kelas;
+            dd($list);
+            return view('mainview.siswa-tab', compact('guru', 'list'));
         }
-        return view('mainview.kelas-tab', ['data' => $kelas]);
     }
 
     public function guru(){

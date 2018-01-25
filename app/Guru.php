@@ -35,7 +35,7 @@ class Guru extends Model
     }
 
     public function kelas(){
-        return $this->belongsToMany('App\Kelas', 'guru_kelas');
+        return $this->hasManyThrough('App\Mapel', 'App\Kelas');
     }
 
     public function user(){
